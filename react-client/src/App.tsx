@@ -1,13 +1,6 @@
 import React, { useEffect } from "react";
 import "./App.css";
-import {
-  Box,
-  Button,
-  CircularProgress,
-  Container,
-  Grid,
-  Typography,
-} from "@mui/material";
+import { Box, Button, CircularProgress, Container, Grid } from "@mui/material";
 import { BobaProvider, useBobaContext } from "./contexts/BobaContext";
 import { Filters } from "./components/Filters";
 import { useBobaShops } from "./hooks/useBobaShops";
@@ -15,6 +8,7 @@ import { fetchOffices } from "./services/api";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BobaShopCard } from "./components/BobaShopCard";
 import { BobaShop } from "./types";
+import { BobaBanner } from "./components/BobaBanner";
 
 const queryClient = new QueryClient();
 
@@ -78,55 +72,7 @@ const AppContent = () => {
             },
           }}
         >
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              mb: 4,
-            }}
-          >
-            <Box
-              component="img"
-              src="/images/logo.png"
-              alt="Boba-Fettch Logo"
-              sx={{
-                width: 300,
-                height: 300,
-                mb: 2,
-                filter: "drop-shadow(0 0 10px rgba(255, 232, 31, 0.5))",
-              }}
-            />
-            <Typography
-              variant="h1"
-              component="h1"
-              gutterBottom
-              align="center"
-              sx={{
-                fontFamily: "'Star Jedi', 'Arial', sans-serif",
-                color: "#E50914",
-                textShadow:
-                  "0 0 10px rgba(255, 232, 31, 0.5), 0 0 20px rgba(255, 232, 31, 0.3)",
-                mb: 4,
-                letterSpacing: "0.2em",
-                textTransform: "uppercase",
-                "@keyframes crawl": {
-                  "0%": {
-                    transform: "scale(1)",
-                  },
-                  "50%": {
-                    transform: "scale(1.05)",
-                  },
-                  "100%": {
-                    transform: "scale(1)",
-                  },
-                },
-                animation: "crawl 3s infinite",
-              }}
-            >
-              Boba-Fettch
-            </Typography>
-          </Box>
+          <BobaBanner title="Boba-Fettch" />
           <Filters />
 
           <Grid container spacing={3}>
