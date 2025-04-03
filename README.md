@@ -6,14 +6,14 @@ Sample Project to find the nearest boba tea shops near Netflix HQ
 
 ## Quick Start
 
-1. Add a `.env` file with the following content:
+1. Add a `.env` file to the `server` directory with the following contents:
 
 ```
 YELP_API_KEY="your_yelp_api_key"
 PORT=5000
 ```
 
-2. Run the `start.sh` command below
+2. Run the `start.sh` script
 
 ```
 bash start.sh
