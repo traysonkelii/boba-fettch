@@ -57,7 +57,7 @@ const AppContent = () => {
     <Box
       sx={{
         minHeight: "100vh",
-        background: "linear-gradient(to bottom, #141414 0%, #181818 100%)",
+        background: "linear-gradient(to bottom, #000000 0%, #1a1a1a 100%)",
         pb: 4,
       }}
     >
@@ -74,22 +74,59 @@ const AppContent = () => {
               left: 0,
               right: 0,
               height: "6px",
-              background: "linear-gradient(to right, #E50914, #B20710)",
+              background: "linear-gradient(to right, #E50914, #FFD700)",
             },
           }}
         >
-          <Typography
-            variant="h1"
-            component="h1"
-            gutterBottom
-            align="center"
+          <Box
             sx={{
-              textShadow: "2px 2px 4px rgba(0,0,0,0.5)",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
               mb: 4,
             }}
           >
-            Boba Fetch
-          </Typography>
+            <Box
+              component="img"
+              src="/images/logo.png"
+              alt="Boba-Fettch Logo"
+              sx={{
+                width: 300,
+                height: 300,
+                mb: 2,
+                filter: "drop-shadow(0 0 10px rgba(255, 232, 31, 0.5))",
+              }}
+            />
+            <Typography
+              variant="h1"
+              component="h1"
+              gutterBottom
+              align="center"
+              sx={{
+                fontFamily: "'Star Jedi', 'Arial', sans-serif",
+                color: "#E50914",
+                textShadow:
+                  "0 0 10px rgba(255, 232, 31, 0.5), 0 0 20px rgba(255, 232, 31, 0.3)",
+                mb: 4,
+                letterSpacing: "0.2em",
+                textTransform: "uppercase",
+                "@keyframes crawl": {
+                  "0%": {
+                    transform: "scale(1)",
+                  },
+                  "50%": {
+                    transform: "scale(1.05)",
+                  },
+                  "100%": {
+                    transform: "scale(1)",
+                  },
+                },
+                animation: "crawl 3s infinite",
+              }}
+            >
+              Boba-Fettch
+            </Typography>
+          </Box>
           <Filters />
 
           <Grid container spacing={3}>
@@ -108,7 +145,17 @@ const AppContent = () => {
 
           {data?.total && data.total > offset + 20 && !isLoading && (
             <Box sx={{ display: "flex", justifyContent: "center", my: 4 }}>
-              <Button variant="contained" onClick={handleLoadMore}>
+              <Button
+                variant="contained"
+                onClick={handleLoadMore}
+                sx={{
+                  bgcolor: "#E50914",
+                  color: "#FFF",
+                  "&:hover": {
+                    bgcolor: "#FFD700",
+                  },
+                }}
+              >
                 Load More
               </Button>
             </Box>
