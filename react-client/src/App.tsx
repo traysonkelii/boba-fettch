@@ -1,6 +1,8 @@
 import React from "react";
 import "./App.css";
 import { Box, Container, Typography } from "@mui/material";
+import { BobaProvider } from "./contexts/BobaContext";
+import { Filters } from "./components/Filters";
 
 const AppContent = () => {
   return (
@@ -40,6 +42,7 @@ const AppContent = () => {
           >
             Boba Fetch
           </Typography>
+          <Filters />
         </Box>
       </Container>
     </Box>
@@ -47,7 +50,11 @@ const AppContent = () => {
 };
 
 function App() {
-  return <AppContent />;
+  return (
+    <BobaProvider>
+      <AppContent />
+    </BobaProvider>
+  );
 }
 
 export default App;
