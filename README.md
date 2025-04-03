@@ -13,10 +13,22 @@ YELP_API_KEY="your_yelp_api_key"
 PORT=5000
 ```
 
-2. Run the `start.sh` script
+2. Setup the nestJS server
 
 ```
-bash start.sh
+cd server
+npm i
+npm run start:dev
 ```
+
+3. Setup react frontend server (in a separate terminal)
+
+```
+cd react-client
+npm i
+npm run start
+```
+
+4. Navigate to http://localhost:3000
 
 An instance of the server and the client should be running on ports `5000` and `3000` respectively.
