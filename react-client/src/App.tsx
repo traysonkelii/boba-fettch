@@ -1,10 +1,42 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.css";
-import { Box, Container, Typography } from "@mui/material";
-import { BobaProvider } from "./contexts/BobaContext";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Container,
+  Grid,
+  Typography,
+} from "@mui/material";
+import { BobaProvider, useBobaContext } from "./contexts/BobaContext";
 import { Filters } from "./components/Filters";
+import { useBobaShops } from "./hooks/useBobaShops";
+import { fetchOffices } from "./services/api";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { BobaShopCard } from "./components/BobaShopCard";
+
+const queryClient = new QueryClient();
 
 const AppContent = () => {
+  const { setOffices, setSelectedOffice } = useBobaContext();
+  const [offset, setOffset] = React.useState(0);
+  const { data, isLoading, isFetching } = useBobaShops(offset);
+
+  const handleLoadMore = () => {
+    setOffset((prev) => prev + 20);
+  };
+
+  useEffect(() => {
+    const loadOffices = async () => {
+      const offices = await fetchOffices();
+      setOffices(offices);
+      if (offices.length > 0) {
+        setSelectedOffice(offices[0].name);
+      }
+    };
+    loadOffices();
+  }, [setOffices, setSelectedOffice]);
+
   return (
     <Box
       sx={{
@@ -43,6 +75,28 @@ const AppContent = () => {
             Boba Fetch
           </Typography>
           <Filters />
+
+          <Grid container spacing={3}>
+            {data?.businesses.map((shop) => (
+              <Grid size={4}>
+                <BobaShopCard shop={shop} />
+              </Grid>
+            ))}
+          </Grid>
+
+          {(isLoading || isFetching) && (
+            <Box sx={{ display: "flex", justifyContent: "center", my: 4 }}>
+              <CircularProgress sx={{ color: "#E50914" }} />
+            </Box>
+          )}
+
+          {data?.total && data.total > offset + 20 && !isLoading && (
+            <Box sx={{ display: "flex", justifyContent: "center", my: 4 }}>
+              <Button variant="contained" onClick={handleLoadMore}>
+                Load More
+              </Button>
+            </Box>
+          )}
         </Box>
       </Container>
     </Box>
@@ -51,9 +105,11 @@ const AppContent = () => {
 
 function App() {
   return (
-    <BobaProvider>
-      <AppContent />
-    </BobaProvider>
+    <QueryClientProvider client={queryClient}>
+      <BobaProvider>
+        <AppContent />
+      </BobaProvider>
+    </QueryClientProvider>
   );
 }
 

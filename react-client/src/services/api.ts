@@ -13,6 +13,7 @@ export const fetchBobaShops = async (
   sortBy: SortOption,
   offset: number = 0
 ): Promise<BobaShopsResponse> => {
+  console.log(offset);
   const response = await axios.get(`${API_BASE_URL}/boba-shops`, {
     params: {
       location,
