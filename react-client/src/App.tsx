@@ -38,7 +38,7 @@ const AppContent = () => {
               mb: 4,
             }}
           >
-            Boba Finder
+            Boba Fetch
           </Typography>
         </Box>
       </Container>
