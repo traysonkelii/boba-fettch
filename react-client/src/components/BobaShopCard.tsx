@@ -42,33 +42,42 @@ export const BobaShopCard: React.FC<BobaShopCardProps> = ({ shop }) => {
           sx={{ objectFit: "cover" }}
         />
       )}
-      <CardContent sx={{ flexGrow: 1 }}>
-        <Typography variant="h6" component="h2" gutterBottom>
-          {shop.name}
-        </Typography>
-        <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
-          <Rating value={shop.rating} precision={0.5} readOnly />
-          <Typography variant="body2" color="text.secondary" sx={{ ml: 1 }}>
-            ({shop.review_count} reviews)
+      <CardContent
+        sx={{
+          flexGrow: 1,
+          display: "flex",
+          flexDirection: "column",
+          p: 2,
+        }}
+      >
+        <Box sx={{ flexGrow: 1 }}>
+          <Typography variant="h6" component="h2" gutterBottom>
+            {shop.name}
           </Typography>
-        </Box>
-        <Chip
-          label={`${metersToMiles(shop.distance)} miles`}
-          size="small"
-          sx={{ mb: 1, bgcolor: "#E50914", color: "white" }}
-        />
-        <Typography variant="body2" color="text.secondary" paragraph>
-          {shop.location.address1}
-          {shop.location.address2 && `, ${shop.location.address2}`}
-          {shop.location.address3 && `, ${shop.location.address3}`}
-          <br />
-          {shop.location.city}, {shop.location.state} {shop.location.zip_code}
-        </Typography>
-        {shop.display_phone && (
+          <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
+            <Rating value={shop.rating} precision={0.5} readOnly />
+            <Typography variant="body2" color="text.secondary" sx={{ ml: 1 }}>
+              ({shop.review_count} reviews)
+            </Typography>
+          </Box>
+          <Chip
+            label={`${metersToMiles(shop.distance)} miles`}
+            size="small"
+            sx={{ mb: 1, bgcolor: "#E50914", color: "white" }}
+          />
           <Typography variant="body2" color="text.secondary" paragraph>
-            {shop.display_phone}
+            {shop.location.address1}
+            {shop.location.address2 && `, ${shop.location.address2}`}
+            {shop.location.address3 && `, ${shop.location.address3}`}
+            <br />
+            {shop.location.city}, {shop.location.state} {shop.location.zip_code}
           </Typography>
-        )}
+          {shop.display_phone && (
+            <Typography variant="body2" color="text.secondary" paragraph>
+              {shop.display_phone}
+            </Typography>
+          )}
+        </Box>
         <Button
           variant="contained"
           href={shop.url}
@@ -76,7 +85,7 @@ export const BobaShopCard: React.FC<BobaShopCardProps> = ({ shop }) => {
           rel="noopener noreferrer"
           fullWidth
           sx={{
-            mt: "auto",
+            mt: 2,
             bgcolor: "#E50914",
             "&:hover": {
               bgcolor: "#B20710",

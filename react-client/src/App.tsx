@@ -14,13 +14,29 @@ import { useBobaShops } from "./hooks/useBobaShops";
 import { fetchOffices } from "./services/api";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BobaShopCard } from "./components/BobaShopCard";
+import { BobaShop } from "./types";
 
 const queryClient = new QueryClient();
 
 const AppContent = () => {
-  const { setOffices, setSelectedOffice } = useBobaContext();
+  const { setOffices, setSelectedOffice, selectedOffice, sortBy } =
+    useBobaContext();
   const [offset, setOffset] = React.useState(0);
+  const [allShops, setAllShops] = React.useState<BobaShop[]>([]);
   const { data, isLoading, isFetching } = useBobaShops(offset);
+
+  // Reset shops and offset when sort or office changes
+  useEffect(() => {
+    setAllShops([]);
+    setOffset(0);
+  }, [sortBy, selectedOffice]);
+
+  // Append new shops when data changes
+  useEffect(() => {
+    if (data?.businesses) {
+      setAllShops((prev) => [...prev, ...data.businesses]);
+    }
+  }, [data]);
 
   const handleLoadMore = () => {
     setOffset((prev) => prev + 20);
@@ -77,8 +93,8 @@ const AppContent = () => {
           <Filters />
 
           <Grid container spacing={3}>
-            {data?.businesses.map((shop) => (
-              <Grid size={4}>
+            {allShops.map((shop) => (
+              <Grid size={4} key={shop.id}>
                 <BobaShopCard shop={shop} />
               </Grid>
             ))}
