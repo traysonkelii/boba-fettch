@@ -1,26 +1,53 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import { Box, Container, Typography } from "@mui/material";
+
+const AppContent = () => {
+  return (
+    <Box
+      sx={{
+        minHeight: "100vh",
+        background: "linear-gradient(to bottom, #141414 0%, #181818 100%)",
+        pb: 4,
+      }}
+    >
+      <Container maxWidth="lg">
+        <Box
+          sx={{
+            my: 4,
+            pt: 4,
+            position: "relative",
+            "&::before": {
+              content: '""',
+              position: "absolute",
+              top: 0,
+              left: 0,
+              right: 0,
+              height: "6px",
+              background: "linear-gradient(to right, #E50914, #B20710)",
+            },
+          }}
+        >
+          <Typography
+            variant="h1"
+            component="h1"
+            gutterBottom
+            align="center"
+            sx={{
+              textShadow: "2px 2px 4px rgba(0,0,0,0.5)",
+              mb: 4,
+            }}
+          >
+            Boba Finder
+          </Typography>
+        </Box>
+      </Container>
+    </Box>
+  );
+};
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  return <AppContent />;
 }
 
 export default App;
